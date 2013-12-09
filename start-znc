@@ -2,6 +2,7 @@
 
 # Options.
 DATADIR="/znc-data"
+BITLBEEDATADIR="/bitlbee-data"
 
 # Build modules from source.
 if [ -d "${DATADIR}/modules" ]; then
@@ -27,5 +28,7 @@ if [ ! -f "${DATADIR}/configs/znc.conf" ]; then
   cp /src/znc.conf.default "${DATADIR}/configs/znc.conf"
 fi
 
+# start bitlbee in background forking mode
+bitlbee -F -i 127.0.0.1 -p 6668 -d $BITLBEEDATADIR
 # Start ZNC.
 exec znc --foreground --datadir="$DATADIR" $@
